@@ -4,6 +4,13 @@ do
   echo $i
 done
 
+# loop variables
+names=('tom' 'allen' 'king')
+for cur_name in $names:
+do
+  echo $cur_name
+done
+
 # loop ls command results
 for var in `ls -alF`
 do
