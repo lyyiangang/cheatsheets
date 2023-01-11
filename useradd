@@ -1,0 +1,2 @@
+# add user tt
+useradd -d /home/tt  -g root -u 123 tt 

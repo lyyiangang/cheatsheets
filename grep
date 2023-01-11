@@ -32,3 +32,11 @@ ps aux | grep -E --color 'bash|$'
 
 # 只显示满足正则匹配的字符串
 grep -oP '\d+' <str>
+
+# grep in files with specified extension
+grep -R --include="*.cxx"  "ToSearchString"  .
+
+# check whether string exist in file
+if grep -q 'target_str' a.txt; then
+	echo "find str in a.txt"
+fi

@@ -1,3 +1,7 @@
+
+# install cifs format support
+apt install cifs-common -y
+
 # To mount / partition as read-write in repair mode:
 mount -o remount,rw /
 
@@ -9,6 +13,14 @@ mount -o uid=username,gid=usergroup /dev/sdx /mnt/xxx
 
 # To mount a remote NFS directory:
 mount -t nfs <host>:<remote-dir> <local-dir>
+#e.g:
+sudo mount -t nfs -o rw 192.168.0.2:/volume1/Data /home/Data/
 
 # To mount an ISO:
 mount -o loop disk1.iso /mnt/disk
+
+# mount 远程文件夹到本地（有密码)
+sudo mount -t cifs -o user=user_allen,password=abc,vers=1.0  //192.168.50.1/share /home/abc/remote_disk
+
+# guest身份mount
+sudo mount -t cifs -o guest,vers=1.0  //192.168.50.1/share /home/abc/remote_disk

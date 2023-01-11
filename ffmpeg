@@ -1,4 +1,4 @@
-# To print file metadata:
+# To print file metadata(e.g.size):
 ffmpeg -i <file>
 
 # To convert all m4a files to mp3
@@ -16,6 +16,9 @@ ffmpeg -i video.ext -i audio.ext -c:v copy -c:a copy output.ext
 
 # To add ass subtitle to the video
 ffmpeg -i input_video.mp4 -vf ass=sub.ass output_video_subtitles.mp4
+
+# rotate a video
+ffmpeg -i ori.mp4 -vf "transpose=2" output.mp4
 
 # To convert webm to mp4
 ffmpeg -i input_video.webm output_video.mp4
@@ -41,3 +44,12 @@ file '/path/to/file2'
 file '/path/to/file3'
     
 ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4
+
+# play yuv format video
+ffplay  -pixel_format nv12 -video_size 1600x1300 -i ./1_camera_2311.yuv
+
+# convert image to yuv format
+ffmpeg -i input.png -s 368x249 -pix_fmt yuv420p test.yuv
+
+# crop video,-ss: 起始时间，单位为s. -t:持续时间，单位s
+ffmpeg -ss 25 -t 30 -accurate_seek -i video.flv -codec copy out.mp4

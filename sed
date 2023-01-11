@@ -23,4 +23,5 @@ sed '/Once upon a time/i\Chapter 1'
 sed '/happily ever after/a\The end.'
 
 # extract digital from string. Warning, sed use [0-9] match digital number. \1 means the first match object. /p mean 'print'
-echo "age:30"  | sed -nE "s/.*:([0-9])/\1/p" 
+echo "age:30"  | sed -nE "s/.*:([0-9])/\1/p"  # print '30'
+

@@ -6,10 +6,18 @@ done
 
 # loop variables
 names=('tom' 'allen' 'king')
-for cur_name in $names:
+for cur_name in ${names[@]}
 do
   echo $cur_name
 done
+
+# loop by index
+names=('tom' 'allen' 'king')
+N=${#names[@]}
+for((i=0;i<$N;i++))
+do
+  echo ${names[$i]}
+done  
 
 # loop ls command results
 for var in `ls -alF`

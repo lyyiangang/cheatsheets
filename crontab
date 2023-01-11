@@ -1,6 +1,9 @@
 ---
 tags: [ job, scheduler, periodic ]
 ---
+# modify config file and add one line like this:0 0 * * * /home/user/command.sh
+crontab -e
+
 # set a shell
 SHELL=/bin/bash
 

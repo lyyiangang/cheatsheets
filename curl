@@ -15,6 +15,9 @@ curl -u <username>:<password> <url>
 
 # To download a file with a proxy:
 curl -x <proxy-host>:<port> <url>
+#e.g.
+export HTTP_PROXY="http://127.0.0.1"
+curl -x ${HTTP_PROXY}  test.out 
 
 # To download a file over FTP:
 curl -u <username>:<password> -O ftp://example.com/pub/file.zip

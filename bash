@@ -25,3 +25,11 @@ echo ${PIPESTATUS[0]}  # replace 0 with N
 
 # To create a lockfile:
 ( set -o noclobber; echo > my.lock ) || echo 'Failed to create lock file'
+
+# define a function
+myfunc()
+{
+  echo  'input is ' $1
+}
+myfunc('hello')
+

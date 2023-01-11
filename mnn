@@ -1,0 +1,11 @@
+# convert a nhwc buffer to nchw format
+
+cv::Mat img=...;//in nhwc format
+std::vector<int> dim{1, input_H, input_W, 3};
+auto nhwc_Tensor = MNN::Tensor::create<float>(dim, img.data, MNN::Tensor::TENSORFLOW);//define a nhwc buff.
+mnn_net->getSessionInput(session, NULL)->copyFromHostTensor(nhwc_Tensor);//convert to nchw when call copyFromHostTensor
+
+# time profiling
+
+format: benchmark.out models_folder [loop_count] [warmup] [forwardtype] [numberThread] [precision]
+e.g:./benchmark.out ../models 10 0

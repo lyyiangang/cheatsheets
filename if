@@ -1,0 +1,21 @@
+# equal compare
+
+if [[ $1 == $2 ]]
+  then
+  return 0
+fi
+
+# equal
+
+if [[ -z ${ver2[i]} ]]
+then
+  echo 'equal value'
+fi
+
+# greater
+
+if (( 3 > 1 ))
+then
+    echo 'greater'
+    return 1
+fi
