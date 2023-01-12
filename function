@@ -1,0 +1,19 @@
+# define bash function, return a value from myfunc.
+
+function myfunc()
+{
+    myresult='some value'
+}
+
+myfunc
+echo $myresult
+
+# way 2 return value.
+function myfunc()
+{
+    local  myresult='some value'
+    echo "$myresult"
+}
+
+result=$(myfunc)   # or result=`myfunc`
+echo $result

@@ -42,3 +42,6 @@ curl httpbin.org/ip
 
 # To get only the HTTP status code:
 curl -o /dev/null -w '%{http_code}\n' -s -I URL
+
+# get the file list on remote machine
+curl -s http://192.168.0.1:8889/releases/

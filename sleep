@@ -1,0 +1,15 @@
+---
+syntax: bash
+---
+
+# sleep one second
+sleep 1
+
+# sleep 2m30s
+sleep 2m 30s    
+
+# format:
+s: seconds
+m: minutes
+h: hours
+d: days

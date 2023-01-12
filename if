@@ -5,7 +5,13 @@ if [[ $1 == $2 ]]
   return 0
 fi
 
-# equal
+# compare 2 numbers
+if ($i<5)    
+# or 
+if [ $i -lt 5 ]    
+
+
+# equal compare
 
 if [[ -z ${ver2[i]} ]]
 then
@@ -19,3 +25,12 @@ then
     echo 'greater'
     return 1
 fi
+
+# if else
+if TEST-COMMAND
+then
+  STATEMENTS1
+else
+  STATEMENTS2
+fi
+
