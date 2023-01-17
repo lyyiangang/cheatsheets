@@ -1,0 +1,4 @@
+# redirect command output to stdout
+from subprocess import call
+if(call(['ls', '-l'], stdout = stdout, stderr=stdout)!=0):
+  pass
