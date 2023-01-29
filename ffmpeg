@@ -20,6 +20,9 @@ ffmpeg -i input_video.mp4 -vf ass=sub.ass output_video_subtitles.mp4
 # rotate a video
 ffmpeg -i ori.mp4 -vf "transpose=2" output.mp4
 
+# resize img
+ffmpeg -i input.jpg -vf scale=320:240 output_320x240.png
+
 # To convert webm to mp4
 ffmpeg -i input_video.webm output_video.mp4
 

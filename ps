@@ -13,3 +13,6 @@ ps -eo pid,user,command
 # Exclude grep from your grepped output of ps.
 # Add [] to the first letter. Ex: sshd -> [s]shd
 ps aux | grep '[h]ttpd'
+
+# kill process by name, e.g. kill firefox process owned by user yangyan
+ps -axu | grep yangyan | grep firefox | awk '{print $2}' | xargs -i kill {}
