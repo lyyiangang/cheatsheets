@@ -1,0 +1,13 @@
+# extract specified pages from a .pdf file, install pdftk first. apt install -y pdftk
+# extract 12-15, 18 and 20 pages from full-pdf.pdf
+pdftk full-pdf.pdf cat 12-15 A18 A20 output outfile_p12-15.pdf
+
+# merge multi pdf files.
+pdftk 1.pdf 2.pdf 3.pdf cat output 123.pdf
+
+# merge images and pdf file to a single pdf. sudo apt install imagemagick
+# 如果遇到permision问题，可以通过以下方式修改:
+# 1. sudo vi /etc/ImageMagick-7/policy.xml
+# 2. add following section before </policymap> 
+#   <policy domain="coder" rights="read | write" pattern="PDF" />
+convert image1.jpg image2.png PDFfile.pdf outputFileName.pdf
