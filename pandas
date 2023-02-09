@@ -1,0 +1,60 @@
+
+# read/save csv file
+import pandas as pd
+df = pd.read_cvs('gt.csv')
+print(f'{df.columns}, {df.index}, {len(df)}')
+df.to_csv('tmp.csv')
+
+# iter row by row, read and set
+for index, row in tqdm(df.iterrows(), total = len(df)):
+    # getter
+    filename = row['filename']
+    # setter
+    df.at[index, 'R'] = np.ones(3, 3).reshape(-1).tolist()
+    #df.loc[index, 'R'] = np.ones(3, 3).reshape(-1).tolist()
+    
+    # a way to parse np.array
+    R = np.asarray(eval(row['R'])).reshape(3, 3)
+
+# set a column as index. df.reset_index()
+df = df.set_index['filename']
+
+# 
+
+# extract basename and populate it to 'basename' column
+df['basename'] = df['full_path'].apply(lambda xx : os.path.basename(xx))
+
+# filter rows match specify condition
+new_df = df[df['basename'] == '1.jpg']
+
+# slice
+sub_df = df[:100]
+
+# group by 'dirname' and count number of files in each dir.
+gps = df.groupby('dirname').groups
+for dir_name, index in gps.items():
+    print(f'{dir_name} cotains {len(index)} files.')
+
+############ remove #############################
+# drop invald data,e.g. if a row's height is nan, this row will will removed.
+new_df = df.dropna(subset = ['height'])
+
+# drop null, pd.isnull/pd.notnull
+new_df = df[~pd.isnull(df.fullpath)]
+
+# boolean operation
+mask = df['is_val'] & ~df['is_test']
+#mask = df['is_val'] | ~df['is_test']
+df_new = df[mask]
+
+# delete column
+del df['fiename']
+
+# cat df
+new_df = pd.concat([df1, df2])
+
+# merge df by filename
+df = pd.merge(df_old, df_new, left_on = 'filename', right_on = 'filename', how = 'outer')
+
+
+

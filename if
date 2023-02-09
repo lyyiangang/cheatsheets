@@ -1,3 +1,4 @@
+# you can file more samples in 'bash' tag
 # equal compare
 
 if [[ $1 == $2 ]]
@@ -34,3 +35,9 @@ else
   STATEMENTS2
 fi
 
+# compare bash script's input args number
+if [ $# -ne 1]
+then
+  echo "this script need one arguments"
+  exit 1
+fi
