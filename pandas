@@ -3,7 +3,8 @@
 import pandas as pd
 df = pd.read_cvs('gt.csv')
 print(f'{df.columns}, {df.index}, {len(df)}')
-df.to_csv('tmp.csv')
+df.to_csv('tmp.csv', index = False) # do not save index when index is False
+
 
 # iter row by row, read and set
 for index, row in tqdm(df.iterrows(), total = len(df)):
@@ -11,7 +12,7 @@ for index, row in tqdm(df.iterrows(), total = len(df)):
     filename = row['filename']
     # setter
     df.at[index, 'R'] = np.ones(3, 3).reshape(-1).tolist()
-    #df.loc[index, 'R'] = np.ones(3, 3).reshape(-1).tolist()
+    #df.loc[index_start, index_end, 'R'] = np.ones(3, 3).reshape(-1).tolist()
     
     # a way to parse np.array
     R = np.asarray(eval(row['R'])).reshape(3, 3)
@@ -19,7 +20,19 @@ for index, row in tqdm(df.iterrows(), total = len(df)):
 # set a column as index. df.reset_index()
 df = df.set_index['filename']
 
-# 
+# slice by columns
+df_new = df[['name', 'age']]
+
+# slice by index
+df_new = df[5:10]
+
+# select row by index
+df_new = df.loc[32]
+df_new = df.loc[32:50, ['filename', 'path']]
+
+
+# extract rows which in list
+valid_mask = df['basename'].isin(white_list)
 
 # extract basename and populate it to 'basename' column
 df['basename'] = df['full_path'].apply(lambda xx : os.path.basename(xx))
@@ -55,6 +68,5 @@ new_df = pd.concat([df1, df2])
 
 # merge df by filename
 df = pd.merge(df_old, df_new, left_on = 'filename', right_on = 'filename', how = 'outer')
-
 
 
