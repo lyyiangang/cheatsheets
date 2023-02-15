@@ -67,6 +67,9 @@ df_new = df[mask]
 # delete column
 del df['fiename']
 
+# delete duplcated rows
+df.drop_duplicates(subset=['brand', 'style'], keep='last')
+
 # cat df
 new_df = pd.concat([df1, df2])
 
