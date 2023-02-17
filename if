@@ -41,3 +41,8 @@ then
   echo "this script need one arguments"
   exit 1
 fi
+
+if [ ! condition ]
+then
+  echo 'not condition'
+if
