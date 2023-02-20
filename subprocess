@@ -2,3 +2,14 @@
 from subprocess import call
 if(call(['ls', '-l'], stdout = stdout, stderr=stdout)!=0):
   pass
+
+# call a bash script and print output via your log function
+try:
+    # redict output to PIPE instead stdout
+    proc = subprocess.Popen(('/bin/bash', 'test.sh'), stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+    with proc:
+        dump = proc.stdout.read()
+        lg.info(f'{dump}')
+except Exception as ee:
+    lg.error(f'get error:{ee}')
+
