@@ -31,6 +31,9 @@ df_new = df.loc[32]
 df_new = df.loc[32:50, ['filename', 'path']]
 
 
+# sort by column
+df = df.sort_values(by=['col1'])
+
 # extract rows which in list
 valid_mask = df['basename'].isin(white_list)
 

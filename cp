@@ -17,3 +17,6 @@ cp -P <symlink-dir> <dest-dir>
 
 # To copy sparsely:
 cp --sparse=always <src> <dest>
+
+# copy with parent path
+cp --parents abc/src dest

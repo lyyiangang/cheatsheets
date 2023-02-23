@@ -3,3 +3,14 @@ pgrep <pattern>
 
 # To kill all PIDs matching <pattern>:
 pgrep -f <pattern> | xargs kill
+
+
+# check alive process, start it if dead.
+
+if pgrep -f 'python main.py' > /dev/null
+then
+    echo 'find the process alive, do nothing'
+else
+    echo 'not find process, start it now'
+    python main.py 
+

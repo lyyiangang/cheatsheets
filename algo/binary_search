@@ -1,0 +1,53 @@
+def binary_search_test():
+    """ 两种binary search方法，第一种比较原始，容易理解，如果数据数据有重复，得到的index会是靠中间的位置，比如在数组[2, 2, 2,2]中查找2这个数字，得到的index是1。
+    而使用left_bound的方法，找到的则是index=0
+    """
+    def naive_bs(arr, target):
+        # skip empty arr check
+        left = 0
+        right = len(arr) -1
+        while left <= right:
+            mid = (left + right) // 2
+            if arr[mid] == target:
+                return mid
+            elif arr[mid] < target:
+                left = mid + 1
+            elif arr[mid] > target:
+                right = mid - 1
+        return -1
+
+    target = 2    
+    arr = [1, 2, 2, 2, 5]
+    assert naive_bs(arr, target) == 2
+
+    arr = [1, 2, 2, 5]
+    assert naive_bs(arr, target) == 1
+
+    arr = [1, 2]
+    assert naive_bs(arr, target) == 1
+
+    # only get left bound of array
+    def left_bound(arr, target):
+        left = 0
+        right = len(arr)
+        while left < right:
+            mid = (left + right) // 2
+            if arr[mid] == target:
+                right = mid # take care.note stop as naive version
+            elif arr[mid] < target:
+                left = mid + 1
+            elif arr[mid] > target:
+                right = mid # take care. no minus 1 as naive version
+        if left >= len(arr):
+            return -1
+        return left
+    arr = [1, 2, 2, 2, 5]
+    assert left_bound(arr, 2) == 1
+    
+    arr = [1, 2, 2, 2]
+    assert left_bound(arr, 2) == 1
+
+    arr = [1, 2]
+    assert left_bound(arr, 2) == 1
+
+    print('all pass')

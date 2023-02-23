@@ -40,3 +40,5 @@ grep -R --include="*.cxx"  "ToSearchString"  .
 if grep -q 'target_str' a.txt; then
 	echo "find str in a.txt"
 fi
+
+# grep process please see 'pgrep' comand
