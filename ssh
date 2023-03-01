@@ -51,3 +51,6 @@ sshfs <user>@<host>:/path/to/folder /path/to/mount/point
 # Emacs can read file through SSH
 # Doc: http://www.gnu.org/software/emacs/manual/html_node/emacs/Remote-Files.html
 emacs /ssh:<user>@<host>:<file>
+
+# copy authorized file to target machine
+ssh-copy-id -i ~.ssh/id_edabc.pub lyy@192.168.0.1
