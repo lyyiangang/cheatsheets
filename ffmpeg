@@ -48,7 +48,7 @@ file '/path/to/file3'
     
 ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4
 
-# play yuv format video
+# play yuv format video, pixel format could be yuv420p
 ffplay  -pixel_format nv12 -video_size 1600x1300 -i ./1_camera_2311.yuv
 
 # convert image to yuv format
