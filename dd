@@ -26,3 +26,6 @@ dd if=/dev/dsp | ssh -c arcfour -C username@host dd of=/dev/dsp
 
 # Create a 1MB file with zero allocated blocks:
 dd if=/dev/zero of=foo1 seek=1 bs=1M count=0
+
+# backup a partition to img file
+dd bs=4M if=/dev/sdb of=pi_arm64_20230311.img
