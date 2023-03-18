@@ -29,3 +29,13 @@ dd if=/dev/zero of=foo1 seek=1 bs=1M count=0
 
 # backup a partition to img file
 dd bs=4M if=/dev/sdb of=pi_arm64_20230311.img
+
+# burn img to sdcard
+sudo dd if=/path/to/your/raw/firmware of=/dev/mmcblk0 conv=notrunc
+
+# display progress bar
+#sudo apt-get install pv
+pv -tpreb /path/to/your/raw/firmware | sudo dd of=/dev/mmcblk0 conv=notrunc
+
+# 测试硬盘读写速度, ctrl+c 可以看到速度speed。
+sync; dd if=/dev/zero of=./tmp.dat bs=1M count=1024; sync

@@ -24,3 +24,11 @@ sudo mount -t cifs -o user=user_allen,password=abc,vers=1.0  //192.168.50.1/shar
 
 # guest身份mount
 sudo mount -t cifs -o guest,vers=1.0  //192.168.50.1/share /home/abc/remote_disk
+
+# 开机自动挂载,将2t 磁盘挂载到2tdisk目录
+lsblk # check device name
+mkdir /home/firefly/2tdisk
+sudo vi /etc/rc.local
+# add following line
+mount /dev/sda1 /home/firefly/2tdisk
+
