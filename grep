@@ -42,3 +42,15 @@ if grep -q 'target_str' a.txt; then
 fi
 
 # grep process please see 'pgrep' comand
+#
+# grep multi lines
+#
+#.txt file:
+#  """
+#  kind: Deployment
+#  metadata:
+#  name: projecta-web-ms-deployment
+#  namespace: projecta-dev
+#  """
+# to match 'name' row, we can use. P: user perl. z:process multi line. o:only display lines which match
+grep -Pzo "metadata:\s*\n  name:.*$" tmp.txt
