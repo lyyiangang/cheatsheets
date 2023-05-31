@@ -27,3 +27,6 @@ echo "age:30"  | sed -nE "s/.*:([0-9])/\1/p"  # print '30'
 
 # 在列表中每过30行取一行
 sed -n '1~30p' mylist.txt
+
+# 获取进程id(ps -axu) 65521
+echo "jianyin+ 65521 0.0 16448 524 pts" | sed -E 's/\w+\+? ([0-9]+).*/\1/'
