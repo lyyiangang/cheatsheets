@@ -30,3 +30,9 @@ sed -n '1~30p' mylist.txt
 
 # 获取进程id(ps -axu) 65521
 echo "jianyin+ 65521 0.0 16448 524 pts" | sed -E 's/\w+\+? ([0-9]+).*/\1/'
+
+# delete invalide docker images
+#$ docker images
+# pytorch/pytorch <none>   e372     17 months ago    22GB
+# pytorch/pytorch latest   e38     80 moth ago       30GB
+docker images | grep pytorch | sed -E 's/.*(>|latest)\s+(\w+).*/\2/' | xargs -i docker image rm {} 
