@@ -33,3 +33,8 @@ find /path/to/files -type l -print | \
 
 # exclude some files
 rsync -avz --progress ./foler abc@192.168.0.10:/home/abc/code/ --exclude .git/ --exclude tmp/
+
+# only sync files with specified extension, 注意source和target要加/
+rsync -a --include '*/' --include '*.mp3' --exclude '*' source/ target/
+
+
