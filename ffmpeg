@@ -48,11 +48,13 @@ file '/path/to/file3'
     
 ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4
 
-# play yuv format video, pixel format could be yuv420p
-ffplay  -pixel_format nv12 -video_size 1600x1300 -i ./1_camera_2311.yuv
+# play yuv format video, pixel format could be yuv420p or nv12
+ffplay -f rawvideo -pix_fmt nv12  -video_size 1920x1280 -i ./ffmpeg.yuv
 
-# convert image to yuv format
+# convert image to yuv format color range:[16, 255]
 ffmpeg -i input.png -s 368x249 -pix_fmt yuv420p test.yuv
 
+# convert img to full range yuv format color range:[0, 255]
+ffmpeg -lavfi "scale=out_range=full" -i ./img_0_1684742356.24366593.jpg  -pix_fmt nv12 ffmpeg_full_rang.yuv
 # crop video,-ss: 起始时间，单位为s. -t:持续时间，单位s
 ffmpeg -ss 25 -t 30 -accurate_seek -i video.flv -codec copy out.mp4
