@@ -33,6 +33,9 @@ find ./path/ -name '*.txt' -exec cat '{}' \;
 # To find files with extension '.txt' and look for a string into them:
 find ./path/ -name '*.txt' | xargs grep 'string'
 
+# 查找尺寸大于1M的所有文件
+find /path/to/your/folder -type f -size +1M
+
 # To find files with size bigger than 5 Mebibyte and sort them by size:
 find . -size +5M -type f -print0 | xargs -0 ls -Ssh | sort -z
 
