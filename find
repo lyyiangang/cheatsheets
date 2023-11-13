@@ -84,3 +84,6 @@ find . -type f -exec sh -c "echo '{}'; cat '{}';" \;
 
 # To find files that are newer than a file:
 find <path> -newer <target-file>
+
+# skip path.e.g. search all .txt file but ./tmp
+find ./ -type d -name 'tmp' -prune -o 
