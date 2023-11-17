@@ -12,6 +12,8 @@ grep -f <pattern-file> <file>
 
 # Find lines NOT containing pattern:
 grep -v <pattern> <file>
+#e.g. print lines without abc or efg
+grep -Ev 'abc|efg' a.txt
 
 # Set how many lines to show before (-B) and after (-A) pattern:
 grep -B 3 -A 2 <pattern> <file>
