@@ -30,6 +30,11 @@ df_new = df[5:10]
 df_new = df.loc[32]
 df_new = df.loc[32:50, ['filename', 'path']]
 
+# modify one cell
+df.loc[img_name, 'age'] = 30
+# if only one item,it's better to use 'at'
+df.at[img_name, 'age'] = 30
+
 
 # sort by column
 df = df.sort_values(by=['col1'])
