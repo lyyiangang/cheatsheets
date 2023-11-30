@@ -3,6 +3,9 @@
 rsync -avz host:file1 :file1 /dest/
 rsync -avz /source host:/dest
 
+# sync and delete useless file
+rsync -avz $src $dest --delete
+
 # To copy files using checksum (-c) rather than time to detect if the file has
 # changed. (Useful for validating backups):
 rsync -avc <src> <dest>
