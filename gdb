@@ -1,3 +1,5 @@
+# you need build cpp code with 'g++ main.c -o a.out -std=c++11 -g -O0'
+
 # To start the debugger:
 gdb <executable>, gdb --args <executable> [<args>...], gdb -p <pid>
 
@@ -10,6 +12,8 @@ b, break <function>
 # To set a (conditional) breakpoint at a general location:
 b, break <loc> [if <condition>]
   with <loc> as <function>|<file>:<line>|<line>|*<address>|-offset|+offset
+#e.g.
+b src/test.cc:52 if aa==true
 
 # To set a watchpoint, i.e., stop when expression changes its value:
 watch <expr>
