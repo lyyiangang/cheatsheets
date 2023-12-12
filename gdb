@@ -1,7 +1,10 @@
 # you need build cpp code with 'g++ main.c -o a.out -std=c++11 -g -O0'
-
+# ref:https://hikoqiu.github.io/posts/zh/2017/07/GDBchangyongmingling_tech.html
 # To start the debugger:
 gdb <executable>, gdb --args <executable> [<args>...], gdb -p <pid>
+
+# call a function, you can add a break poing in all_func and then use command call
+call add_func(3, 4)
 
 # To exit gdb (after program terminated):
 q, quit
@@ -17,6 +20,7 @@ b src/test.cc:52 if aa==true
 
 # To set a watchpoint, i.e., stop when expression changes its value:
 watch <expr>
+e.g. watch idx==10, break when idx == 10.
 
 # To show all breakpoints and watchpoints:
 info breakpoints, info watchpoints
