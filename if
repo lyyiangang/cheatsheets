@@ -46,3 +46,9 @@ if [ ! condition ]
 then
   echo 'not condition'
 if
+
+# contain string
+if echo 'abc' | grep -q 'ab' ; then
+  echo "It's there"
+fi
+
