@@ -14,3 +14,7 @@ find -name *.pdf | xargs -I{} -n1 echo '&{}='
 # If find returns no result, do not run rm
 # This option is a GNU extension.
 find -name "*.pdf" | xargs --no-run-if-empty rm
+
+# continue run with xargs meet error. need add '|| true' in case of missing 'missmatch' folder
+ls -d */ | xargs -i sh -c 'mv {}/missmatch/* {} || true'
+
