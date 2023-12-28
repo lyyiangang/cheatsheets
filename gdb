@@ -25,11 +25,12 @@ e.g. watch idx==10, break when idx == 10.
 # To show all breakpoints and watchpoints:
 info breakpoints, info watchpoints
 
-# To delete all or given breakpoints and watchpoints:
+# To delete all or given breakpoints and watchpoints.  del all breakpoints, just use 'd'
 clear, delete
 delete <num>
 clear <loc>
   with <loc> as <function>|<file>:<line>|<line>|*<address>|-offset|+offset
+
 
 # To disable a breakpoint:
 dis, disable <num>
