@@ -137,3 +137,6 @@ C-x o
 
 # To Switch in and out of the TUI SingleKey mode:
 C-x s
+
+# print all items
+set print repeats 0
