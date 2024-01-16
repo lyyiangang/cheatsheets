@@ -6,6 +6,8 @@ echo "jianyin+ 65521 0.0 16448 524 pts" | sed -nE 's/\w+\+? ([0-9]+).*/\1/p'
 
 # To replace all occurrences of "day" with "night" and write to stdout:
 sed 's/day/night/g' <file>
+# replace '/' in path to '#'
+sed 's/\//#/g' $PWD
 
 # To replace all occurrences of "day" with "night" within <file>:
 sed -i 's/day/night/g' <file>
