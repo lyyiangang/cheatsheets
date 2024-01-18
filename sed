@@ -38,6 +38,8 @@ echo "age:30"  | sed -nE "s/.*:([0-9])/\1/p"  # print '30'
 # 在列表中每过30行取一行
 sed -n '1~30p' mylist.txt
 
+#如下命令打印1~5行与第9行.
+sed -n '1,5p;9p' test.txt
 
 # delete invalide docker images
 #$ docker images
