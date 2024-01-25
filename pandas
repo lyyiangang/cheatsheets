@@ -5,6 +5,13 @@ df = pd.read_cvs('gt.csv')
 print(f'{df.columns}, {df.index}, {len(df)}')
 df.to_csv('tmp.csv', index = False) # do not save index when index is False
 
+# to save
+df = pd.DataFrame({'name': ['Raphael', 'Donatello'],
+
+                   'mask': ['red', 'purple'],
+
+                   'weapon': ['sai', 'bo staff']})
+df.to_csv('out.csv', index=False)  
 
 # iter row by row, read and set
 for index, row in tqdm(df.iterrows(), total = len(df)):
