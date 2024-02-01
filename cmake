@@ -1,3 +1,7 @@
+# build with debug option
+cmake .. -DCMAKE_BUILD_TYPE=debug 
+
+
 
 # CMakeLists.txt template
 
@@ -26,6 +30,7 @@ set(BPU_libs dnn cnn_intf )
 
 include_directories(${DNN_PATH}/include
                     ${APPSDK_PATH}/include)
+#link_directories should be in front of add_executable 
 link_directories(${DNN_LIB_PATH}
                 ${APPSDK_PATH}/lib)
 
