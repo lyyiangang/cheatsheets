@@ -18,6 +18,18 @@ b, break <loc> [if <condition>]
 #e.g.
 b src/test.cc:52 if aa==true
 
+
+# print loop. print array's fields
+set idx=0
+p persons[idx++].age
+//then press enter, it will print persons[0].age, persons[1].age,...
+
+# print loop way 2. e.g. person.size == 20
+set $idx=0
+while ($idx < 20)
+p persons[$idx++].age
+end
+
 # To set a watchpoint, i.e., stop when expression changes its value:
 watch <expr>
 e.g. watch idx==10, break when idx == 10.
@@ -140,3 +152,10 @@ C-x s
 
 # print all items
 set print repeats 0
+
+# print eigen
+p *mat.row(2).data()@30
+p *mat.data()@100
+
+# add tempory break point, deleted automatically when reach
+tbreak 522

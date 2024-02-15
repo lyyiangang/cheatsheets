@@ -120,3 +120,9 @@ nmap <F2> "= system("uuidgen")[:-2]<C-M>P
 # Delete every line that has a FOO in it. See `:help global`.
 # The _ in the d _ command ensures registers and clipboards are not changed.
 :g/FOO/d _
+
+# move screen up one line
+ctrl + y
+
+# move screen down one line
+ctrl + e
