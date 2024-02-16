@@ -52,3 +52,11 @@ if echo 'abc' | grep -q 'ab' ; then
   echo "It's there"
 fi
 
+# elif
+if [ ! condition ];then
+  echo 'a'
+elif [ conditionb ]; then
+  echo 'b'
+else
+  echo 'c'
+fi

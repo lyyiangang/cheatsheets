@@ -159,3 +159,8 @@ p *mat.data()@100
 
 # add tempory break point, deleted automatically when reach
 tbreak 522
+
+# ignore breakpoint #3 20 times
+ignore 3 20
+# then check how many times #3 hit.
+info b 3
