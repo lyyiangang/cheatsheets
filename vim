@@ -62,6 +62,8 @@ d{motion}       delete text that {motion} moves over
 :%s/foo/bar/gc	ask to manually confirm (`c` flag) each replacement
 # replace \n with ;\n
 :%s/\n/;\r/g
+# replace all digital number 
+:%s/.*([0-9]+).*/\1/g
 
 # Preceding a motion or edition with a number repeats it 'n' times
 # Examples:
