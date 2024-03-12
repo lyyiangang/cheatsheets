@@ -1,6 +1,12 @@
 # To search a file for a pattern:
 grep <pattern> <file>
 
+# grep keyword and print the files' name only
+grep -l 'abc' a.json
+
+# print files which don't contain keyword
+grep -L 'abc' a.json
+
 # To perform a case-insensitive search (with line numbers):
 grep -in <pattern> <file>
 
