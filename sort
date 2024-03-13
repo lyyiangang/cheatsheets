@@ -15,3 +15,9 @@ sort <inputFile> -o <outputFile>
 
 # Sort by default uses /var/tmp to store temp files but size of /var/tmp directory is limited. In order to sort huge use a directory with adequate size:
 sort -T <tempDirectory> <file>
+
+# sort by column
+# aa.txt:
+# tom  30
+# jimmy 40
+sort -k2 -n aa.txt 

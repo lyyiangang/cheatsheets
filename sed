@@ -1,3 +1,8 @@
+#/d : 0-9
+#/s : space
+#/w: /d + a~Z + '_'.  or equivalent to [a-zA-Z0-9_]
+#.* : all keys on keyboard. any charact but '\n'. = /w + /s + $ +.... 
+
 # -n: close automatic print, no prit anly thing
 # /p: print match string(grouped)
 
