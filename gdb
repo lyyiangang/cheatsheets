@@ -1,3 +1,8 @@
+# gen core file, before run app, we need run following commands first.
+sysctl -w kernel.core_pattern=core
+ulimit -c unlimited
+# if in a docker contaienr , we need add --privileged 
+
 # you need build cpp code with 'g++ main.c -o a.out -std=c++11 -g -O0'
 # ref:https://hikoqiu.github.io/posts/zh/2017/07/GDBchangyongmingling_tech.html
 # To start the debugger:

@@ -62,3 +62,12 @@ fi
 #  """
 # to match 'name' row, we can use. P: user perl. z:process multi line. o:only display lines which match
 grep -Pzo "metadata:\s*\n  name:.*$" tmp.txt
+
+# print the lines before and after the match line
+grep -8 'pattern' file
+
+# print the lines after matched line
+grep -A 5 'pattern' file
+
+# print the lines before matched line
+grep -5 'pattern' file
