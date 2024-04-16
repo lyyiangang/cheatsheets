@@ -7,7 +7,7 @@ rsync -avz /source host:/dest
 rsync -avz $src $dest --delete
 
 # To copy files using checksum (-c) rather than time to detect if the file has
-# changed. (Useful for validating backups):
+# changed. (Useful for validating backups, slower.):
 rsync -avc <src> <dest>
 
 # To copy /src/foo folder into destination:
