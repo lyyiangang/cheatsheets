@@ -21,3 +21,18 @@ sort -T <tempDirectory> <file>
 # tom  30
 # jimmy 40
 sort -k2 -n aa.txt 
+
+# a.txt contains "1 2 3", b.txt contains "2 3 4"
+
+# ==1. subtract 2 sets. a.txt - b.txt. print '1'
+sort a.txt  b.txt b.txt | uniq -u # -u: only print items that appear ==1
+
+# >=1. union a.txt and b.txt
+sort a.txt b.txt | uniq #  print '1 2 3 4'
+
+# >= 2. intersect 2 sets.
+sort a.txt b.txt | uniq -d # -d: only print items that appear >= 2
+
+
+
+#  

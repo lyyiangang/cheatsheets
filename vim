@@ -128,3 +128,9 @@ ctrl + y
 
 # move screen down one line
 ctrl + e
+
+# record macro with name 'a', finish record with another 'q'
+qa
+
+# play macro with name 'a'
+@q

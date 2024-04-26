@@ -15,3 +15,6 @@ printf "george jetson\nolive oyl\nbeetle bailey" | awk '$2=="bailey"{print $0}'
 #
 # To execute commands only on matching rows using regex
 printf "george jetson\nolive oyl\nbeetle bailey" | awk '/ley$/{print $0}'
+
+# print the 'code' process id(second columns)
+ps -axu | grep code | awk '{print $2}'
