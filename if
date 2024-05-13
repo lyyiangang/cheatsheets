@@ -1,6 +1,10 @@
+# check folder exsit
+if [ -d "$DIRECTORY" ];
+then
+  echo 'exist'
+fi
 # you can file more samples in 'bash' tag
 # equal compare
-
 if [[ $1 == $2 ]]
   then
   return 0
