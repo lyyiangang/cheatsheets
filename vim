@@ -134,3 +134,12 @@ qa
 
 # play macro with name 'a'
 @q
+
+
+# column pattern. e.g. insert 'abc' at the begin of each line
+1. press 'ctrl' + 'v'
+2. move to end of file(G)
+3. press 'I'//shift +i.
+4. type 'abc' and press 'ESC' twice.
+
+#.
