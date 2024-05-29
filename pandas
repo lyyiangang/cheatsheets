@@ -92,3 +92,5 @@ new_df = pd.concat([df1, df2])
 df = pd.merge(df_old, df_new, left_on = 'filename', right_on = 'filename', how = 'outer')
 
 
+# shuffle 
+df = df.sample(frac = 1)
