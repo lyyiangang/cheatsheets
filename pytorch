@@ -1,0 +1,20 @@
+# dist
+- broad tensor to all rank, 
+import torch.distributed as dist
+if dist.get_ran() != 0:
+  tensor = torch.empty(3, dtype = torch.float)
+else:
+  tensor = torch.tensor([1, 2, 3])
+# when rank 0 reach this line, will will braodcast tensor[1,2,3] to all other ranks
+# when other rank reach this line, others rank will wait for rank 0 finish the broadcast.
+dist.broadcast(tensor, 0) 
+print(tensor)# all rank will print '1, 2,3'
+
+- barrier. 
+rank, world_size = get_dist_info() # rank: current rank. world_size: total rank number
+mmcv.dump(tensors, f'part_{rank}.pkl')
+dist.barrier()# continue only when all rank reach this line
+# after each rank save the pkl files, we can merge them
+fid0 = open('part_0.pkl', 'rb')
+fd1 = open('part_1.pkl', 'rb')
+merge_pkl(fid0, fid1)
