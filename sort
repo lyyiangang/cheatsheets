@@ -22,6 +22,11 @@ sort -T <tempDirectory> <file>
 # jimmy 40
 sort -k2 -n aa.txt 
 
+# split column by ','
+# tom,30
+# jimmy,40
+sort -k2 -t ',' -n aa.txt 
+
 # a.txt contains "1 2 3", b.txt contains "2 3 4"
 
 # ==1. subtract 2 sets. a.txt - b.txt. print '1'
