@@ -20,7 +20,7 @@ sort -T <tempDirectory> <file>
 # aa.txt:
 # tom  30
 # jimmy 40
-sort -k2 -n aa.txt 
+sort -k2 -t ' ' -n aa.txt 
 
 # split column by ','
 # tom,30
