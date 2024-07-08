@@ -52,3 +52,8 @@ sed -n '1,5p;9p' test.txt
 # pytorch/pytorch latest   e38     80 moth ago       30GB
 docker images | grep pytorch | sed -nE 's/.*(>|latest)\s+(\w+).*/\2/p' | xargs -i docker image rm {} 
 
+# replace path. use any char that not occur in path, e.g. '#' or '|' instead of '/'
+aa=/home/old
+bb=/home/new
+echo $aa | sed -E "s|${aa}|${bb}|"  #print /home/new
+
