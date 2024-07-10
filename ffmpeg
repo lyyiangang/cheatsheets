@@ -65,3 +65,10 @@ ffmpeg  -s 1920x1536 -pix_fmt nv12 -i yuv1.yuv -f image2 -pix_fmt rgb24 %03d.png
 # - convert .mp4 to jpg, fps=20
 ffmpeg -i $ff -r 20 -f image2 -pix_fmt rgb24 out/%04d.jpg
 
+# convert all images in folder to a videol
+declare -i num=0;
+for name in `ls`; do mv -f $name `echo $num".jpg"`;num=num+1;done
+ffmpeg -f image2 -i %d.jpg video.mp4
+
+# convert nv12 to png
+ffmpeg -s 640x320 -pix_fmt nv12 -i aa.yuv  -f image2 -pix_fmt rgb24 aa.png
