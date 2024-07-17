@@ -74,3 +74,11 @@ grep -5 'pattern' file
 
 # sum 1+2+3, output : 6
  echo '1\n2\n3' | paste -sd + | bc
+
+# count 'name' occurance 
+gerp  -c 'name' aa.txt
+
+# use grep -c in bash
+count=$(grep -c 'name' aa.txt || true)
+echo $count
+
