@@ -133,7 +133,7 @@ ctrl + e
 qa
 
 # play macro with name 'a'
-@q
+@a
 
 
 # column pattern. e.g. insert 'abc' at the begin of each line
