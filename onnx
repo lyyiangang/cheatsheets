@@ -1,0 +1,102 @@
+## infer onnx model
+
+```
+class ONNXRuntime:
+    def __init__(self, model_path, device_id=0, *args, **kwargs):
+        assert os.path.exists(model_path), f"invalid model_path:{model_path}"
+        self.model_path = model_path
+        print(f'Using ONNX as inference backend')
+        print(f'Using weight: {model_path}')
+        self.device_id = device_id
+        self.init_model()
+
+    def init_model(self):
+        sesstion_option = ort.SessionOptions()
+        sesstion_option.log_severity_level = 3
+        if ort.get_device() == "GPU":
+            # Since ORT 1.9, you are required to explicitly set the providers parameter
+            cus_providers = [
+                (
+                    'CUDAExecutionProvider',
+                    {
+                        'device_id': self.device_id,
+                        'arena_extend_strategy': 'kNextPowerOfTwo',
+                        # 'gpu_mem_limit': 2 * 1024 * 1024 * 1024,
+                        'cudnn_conv_algo_search': 'EXHAUSTIVE',
+                        'do_copy_in_default_stream': False,
+                    }),
+                'CPUExecutionProvider'
+            ]
+            self.session = ort.InferenceSession(
+                self.model_path, providers=cus_providers, sess_options= sesstion_option)
+        else:
+            # CPU
+            assert False
+            self.session = ort.InferenceSession(self.model_path, None, sess_options= sesstion_option)
+
+        assert self.session is not None
+
+        self.input_names = self.get_input_names()
+        self.output_names = self.get_output_names()
+        self.img_meta = {}
+        print("input_names:{}".format(self.input_names))
+        print("output_names:{}".format(self.output_names))
+        assert len(self.input_names) > 0, f"invalid self.input_names"
+        self.cur_input_name = self.input_names[0]
+
+    def get_input_names(self):
+        input_name = []
+        for node in self.session.get_inputs():
+            input_name.append(node.name)
+        return input_name
+
+    def get_output_names(self):
+        output_names = []
+        for node in self.session.get_outputs():
+            output_names.append(node.name)
+        return output_names
+
+    def infer_image(self, img_input, rgb_or_nv12_format = 'rgb'):
+        assert rgb_or_nv12_format in ('rgb', 'nv12')
+        if rgb_or_nv12_format == 'rgb':
+            nv12 = rgb_to_nv12(img_input)
+        else:
+            nv12 = img_input
+        yuv444 = convert_nv12_to_yuv444(nv12)
+        yuv444 = yuv444.transpose(2, 0, 1)  # hwc2chw
+        yuv444 = yuv444[None, ...] # nchw
+        yuv444 = yuv444.astype(np.float32)
+
+        results = self.session.run(None, {self.cur_input_name: yuv444})
+        outputs = [sigmoid(np.array(item).squeeze()) for item in results]
+        ret_dict = dict()
+        for idx, item in enumerate(outputs):
+            ret_dict[self.output_names[idx]] = item
+        return ret_dict
+
+```
+
+# modify onnx model
+
+```
+import onnx
+import onnx_graphsurgeon as gs
+graph = gs.import_onnx(onnx.load('quant_model.onnx'))
+graph.inputs = [graph.tensors()['input']]# modify input node
+graph.cleanup() # remove useless nodes
+onnx.save(gs.export_onnx(graph), 'rgbinp.onnx') # save to new onnx file
+```
+
+# convert onnx to torch model
+import onnx
+import torch
+from onnx2torch import convert
+
+# Path to ONNX model
+onnx_model_path = "/some/path/mobile_net_v2.onnx"
+# You can pass the path to the onnx model to convert it or...
+torch_model_1 = convert(onnx_model_path)
+
+# Or you can load a regular onnx model and pass it to the converter
+onnx_model = onnx.load(onnx_model_path)
+torch_model_2 = convert(onnx_model)

@@ -1,0 +1,9 @@
+YUV:
+    YUV420:
+        YUV420SP
+            NV21(uv交替) : android视频编码格式。 排布方式, w*h个Y，然后交替排列w*h/4个V和w*h/4个U. opencv对应函数 cv::COLOR_YUV2RGB_NV21
+            NV12(uv交替): 和nv21类似，不过是先U后V. opencv对应函数 cv::COLOR_YUV2RGB_NV12
+            I420(先u后v)： 排布方式, w*h个Y，然后w*h/4个U，最后w*h/4个V。opencv对应函数 cv::COLOR_YUV2RGB_I420 
+        YUV420P:
+            4YV12, YU12d
+

@@ -72,3 +72,9 @@ ffmpeg -f image2 -i %d.jpg video.mp4
 
 # convert nv12 to png
 ffmpeg -s 640x320 -pix_fmt nv12 -i aa.yuv  -f image2 -pix_fmt rgb24 aa.png
+
+# disable print log.
+ffmpeg -hide_banner -loglevel error 
+
+# convert bmp to png
+ffmpeg -i aa.bmp bb.png
