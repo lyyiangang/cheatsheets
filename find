@@ -87,3 +87,6 @@ find <path> -newer <target-file>
 
 # skip path.e.g. search all .txt file but ./tmp
 find ./ -type d -name 'tmp' -prune -o 
+
+# find empty file(with size less than 1Byte)
+find ./ -type f -size -1c
