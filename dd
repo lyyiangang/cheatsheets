@@ -38,4 +38,8 @@ sudo dd if=/path/to/your/raw/firmware of=/dev/mmcblk0 conv=notrunc
 pv -tpreb /path/to/your/raw/firmware | sudo dd of=/dev/mmcblk0 conv=notrunc
 
 # 测试硬盘读写速度, ctrl+c 可以看到速度speed。
+# test write
 sync; dd if=/dev/zero of=./tmp.dat bs=1M count=1024; sync
+# test read
+sync; dd if=/home/abc/test.txt of=/dev/null bs=1M count=1024; sync
+
