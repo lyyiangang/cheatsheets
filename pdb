@@ -13,6 +13,7 @@ u(p) [count]
 
 b(reak) [([filename:]lineno | function) [, condition]]
 
+b: list all break points
 
 tbreak [([filename:]lineno | function) [, condition]]
 
