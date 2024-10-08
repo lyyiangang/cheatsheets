@@ -7,6 +7,9 @@ pip search <package>
 # To install packages:
 pip install <package>...
 
+# downgrade package
+pip install --force-reinstall -v "MySQL_python==1.2.2"
+
 # To install a package in user space:
 pip install --user <package>
 
