@@ -25,7 +25,7 @@ b src/test.cc:52 if aa==true
 
 
 # print loop. print array's fields
-set idx=0
+set $idx=0
 p persons[idx++].age
 //then press enter, it will print persons[0].age, persons[1].age,...
 
