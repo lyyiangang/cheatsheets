@@ -1,3 +1,10 @@
+# you need use ' instead of " in awk
+# pattern: regex or condition. action:default print.
+awk 'pattern { action }' file
+# e.g:
+awk '$1 == "Alice" {print $0}' data.txt
+
+
 # To sum integers from a file or stdin, one integer per line:
 printf '1\n2\n3\n' | awk '{ sum += $1} END {print sum}'
 

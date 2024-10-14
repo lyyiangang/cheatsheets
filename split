@@ -1,6 +1,9 @@
 # To split a large text file into smaller files of 1000 lines each:
 split <file> -l 1000
 
+# split big.txt to splitted_big.aa, splitted_big.ab,...
+split big.txt -l 1000 splited_big.
+
 # To split a large binary file into smaller files of 10M each:
 split <file> -b 10M
 
