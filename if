@@ -1,4 +1,4 @@
-# check folder exsit
+# check folder exsit, use '! -d' indicate not exist.
 if [ -d "$DIRECTORY" ];
 then
   echo 'exist'

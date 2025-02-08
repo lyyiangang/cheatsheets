@@ -15,3 +15,6 @@ unzip -l <archive>
 
 # only extract files end with 0, e.g, files with img_0032.jpg, following cmd only extract files end with 0.jpg
 unzip aa.zip '*0.jpg' -d ~/tmp
+
+# overwrite files
+unzip -o aa.zip 

@@ -4,6 +4,9 @@ find -L . -type f
 # To find files by case-insensitive extension (ex: .jpg, .JPG, .jpG):
 find . -iname "*.jpg"
 
+# find files under org_imgs folder
+find . -name "*.jpg" -path '*/org_imgs/*'
+
 # To find directories:
 find . -type d
 
@@ -22,7 +25,7 @@ find . -type f -ctime -1 -print0 | xargs -0 -p cp -t <dir>
 find . -type f -ctime -1 -print0 | xargs -0 -p -J % cp % <dir>
 
 # To find files with extension '.txt' and remove them:
-find ./path/ -name '*.txt' -delete
+find ./ -name '*.txt' -delete
 
 # To find files with tilde as postfix and remove them:
 find ./path/ -name '*~' -delete

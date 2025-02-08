@@ -155,6 +155,11 @@ git pull <remote> <branch> --rebase
 # To update all submodules:
 git submodule update --init --recursive
 
+# add a new submodule
+git submodule add submodule.git
+git submodule init path/to/module
+git submodule update path/to/module
+
 # To perform a shallow clone to only get latest commits:
 # (helps save data when cloning large repos)
 git clone --depth 1 <remote-url>

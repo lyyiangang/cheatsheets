@@ -12,3 +12,6 @@ dpkg -l
 
 # To determine whether a Debian package is installed:
 dpkg -s <deb-file> | grep Status
+
+# uninstall package.use -r or --remove
+dpkg -r your_package

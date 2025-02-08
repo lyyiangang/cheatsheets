@@ -37,3 +37,6 @@ apt purge <package>...
 
 # To list all packages installed:
 apt list --installed
+
+# remove package
+apt remove aa

@@ -1,8 +1,13 @@
-
 # read/save csv file
+"""gt.csv
+filename, score
+aa.txt,0.5
+bb.txt,0.6
+"""
 import pandas as pd
 df = pd.read_cvs('gt.csv')
-print(f'{df.columns}, {df.index}, {len(df)}')
+#df = pd.read_csv('gt.csv', names = ['fullname', 'score'])
+print(f'{df.columns}, {df.index}, {len(df)}') # columns:'filename''score'
 df.to_csv('tmp.csv', index = False) # do not save index when index is False
 
 # to save

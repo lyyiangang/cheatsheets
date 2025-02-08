@@ -1,6 +1,8 @@
 # To search a file for a pattern:
 grep <pattern> <file>
 
+# print line number -n
+grep -n aa.txt
 # grep keyword and print the files' name only
 grep -l 'abc' a.json
 

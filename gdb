@@ -3,6 +3,11 @@ sysctl -w kernel.core_pattern=core
 ulimit -c unlimited
 # if in a docker contaienr , we need add --privileged 
 
+# save breakpoints.
+save breakpoints bb.txt
+# load breakpoints.
+source bb.txt
+
 # you need build cpp code with 'g++ main.c -o a.out -std=c++11 -g -O0'
 # ref:https://hikoqiu.github.io/posts/zh/2017/07/GDBchangyongmingling_tech.html
 # To start the debugger:

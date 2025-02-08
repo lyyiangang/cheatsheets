@@ -1,3 +1,21 @@
+# extract csv row by row
+#e.g. data.csv has:
+#name,age,city
+#Alice,30,New York
+#Bob,25,Los Angeles
+irow=0
+while IFS=',' read -r name age city; do
+    echo "Name: $name, Age: $age, City: $city"
+    irow=$((irow+1))
+    irow=$((irow+1))
+    if [ $(irow) -lt 2];then
+        continue
+    fi
+    echo process $name
+done < data.csv
+
+
+
 # you need use ' instead of " in awk
 # pattern: regex or condition. action:default print.
 awk 'pattern { action }' file

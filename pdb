@@ -12,6 +12,8 @@ u(p) [count]
     在堆栈回溯中，将当前帧向上移动 count 级（默认为 1 级，移向更老的帧）。
 
 b(reak) [([filename:]lineno | function) [, condition]]
+# break on line 132. when idx==3
+b 132, idx==3
 
 b: list all break points
 

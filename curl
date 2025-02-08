@@ -1,6 +1,19 @@
 # To download a file:
 curl <url>
 
+# post naive example
+curl -X POST http://example.com/api/v1/resource
+
+# send json
+curl -X POST http://example.com/api/v1/resource \
+     -H "Content-Type: application/json" \
+     -d '{"key1": "value1", "key2": "value2"}'
+
+# send form
+curl -X POST http://example.com/api/v1/resource \
+     -d "key1=value1&key2=value2"
+
+
 # To download and rename a file:
 curl <url> -o <outfile>
 

@@ -1,0 +1,5 @@
+from p_tqdm import p_map
+def eval(a):
+  return  a+5
+
+p_map(eval, [1,2,3])
