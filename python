@@ -12,3 +12,9 @@ python -m smtpd -n -c DebuggingServer localhost:1025
 
 # Pretty print a json
 python -m json.tool foo.json
+
+# profile cpu usage
+python -m cProfile -s tottime test.py 
+
+# profile memory usage
+python -m memory_profiler test.py
