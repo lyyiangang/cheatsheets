@@ -19,3 +19,9 @@ gcc -isystem /usr/include/myPersonnal/lib/
 
 # To build a GUI for windows (Mingw) (Will disable the term/console):
 gcc -mwindows
+
+# cpp11 support
+g++ -o ${target} ${src} -I . --std=c++11
+
+# build with makefile
+see makefile

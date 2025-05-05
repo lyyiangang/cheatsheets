@@ -1,6 +1,10 @@
+# check folder exsit, use '! -d' indicate not exist.
+if [ -d "$DIRECTORY" ];
+then
+  echo 'exist'
+fi
 # you can file more samples in 'bash' tag
 # equal compare
-
 if [[ $1 == $2 ]]
   then
   return 0
@@ -46,3 +50,17 @@ if [ ! condition ]
 then
   echo 'not condition'
 if
+
+# contain string
+if echo 'abc' | grep -q 'ab' ; then
+  echo "It's there"
+fi
+
+# elif
+if [ ! condition ];then
+  echo 'a'
+elif [ conditionb ]; then
+  echo 'b'
+else
+  echo 'c'
+fi

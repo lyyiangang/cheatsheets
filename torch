@@ -1,0 +1,32 @@
+# see more cmds in pytorch
+# thc/thc.h, no such file...
+pytorch 1.11 delete folder thc
+
+# debug in multi process
+import torch.distributed as dist
+if dist.get_rank() < 1:
+  ipdb.set_trace()
+
+# train with multi gpus
+ngpus=4
+torchrun --nproc_per_node=$ngpus train.py --data=.. --worker=16
+
+## in train.py
+```python
+rank = int(os.getenv('RANK', -1))
+world_size = int(os.getenv('WORLD_SIZE', -1))
+from torch.nn.parallel import DistributedDataParallel as ddp
+model=ddp(model, device_ids=[LOCAL_RANK], output_device=LOCAL_RANK)
+with amp.autocast(enabled=cuda):
+  pred=model(imgs)
+  loss = ...
+  if rank!=-1:
+    loss *= world_size
+
+scaler.scale(loss).backward()
+
+```
+
+
+
+

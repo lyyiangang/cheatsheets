@@ -12,3 +12,6 @@ tree -a
 
 # To list directories only (`-d`), and at a max depth of two levels (`-L`):
 tree -d -L 2
+
+# hide too many files. if great than 100, stop print it.
+tree ./ --filelimit 100

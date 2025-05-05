@@ -25,3 +25,6 @@ convert -density 150 arch1.pdf -quality 80 'output.jpg'
 
 # To convert an N page pdf to N images with explicit filename formatting:
 convert -density 150 arch1.pdf -quality 80 'output-%d.jpg'
+
+# get image size
+convert test.png -print "%w %h\n" /dev/null

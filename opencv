@@ -1,0 +1,14 @@
+
+# Mat, mat do not copy data from arr, arr need free memory
+std::vector<float> arr{2,3,4};
+//         size     type      data_ptr
+cv::Mat mat((3, 1), CV_32FC1, arr.data());
+
+// crop a 30x50 image from full_mat.
+//                rowRange,  colRange
+cv::Mat(full_mat, {0, 50}, {0, 30});
+
+# sum
+float tmp = cv::sum(you_mat)[0];
+
+

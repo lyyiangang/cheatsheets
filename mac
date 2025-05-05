@@ -1,0 +1,6 @@
+# FLOPs
+浮点运算次数，一次乘法是1FLOPs
+
+# MAC, 乘加运算
+2个FLOPs可以兑换一个MAC
+

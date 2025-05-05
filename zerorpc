@@ -1,0 +1,29 @@
+# client
+
+import zerorpc
+import numpy as np
+c = zerorpc.Client()
+c.connect('tcp://0.0.0.0.4242')
+with open('tmp.onnx', 'rb') as fid:
+    buf = fid.read()
+result = c.load_onnx_buf(buf)
+
+img = np.random.random([1,3,64,64]).astype(np.float32)
+outs = c.forward(img.tolist())
+
+# server
+
+class RPCONNXInfer:
+  def __init__(self):
+    pass
+  def load_onnx_buf(self, buf):
+    # load model from bytes
+    self.model = onnx.load_from_string(buf)
+
+  def forward(self, img:List):
+   # infer from img, you need conver np.array to list, and convert back to np.array at last.
+    result = self.model.sess.run(np.asarray(img).astype(np.float32))
+    # convert np.array to list
+    for k, v in result.items():
+        result[k] = v.tolist()
+    return result

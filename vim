@@ -60,6 +60,10 @@ d{motion}       delete text that {motion} moves over
 :s/foo/bar/g	replace all matches (`g` flag) of 'foo' with 'bar' on the current line only
 :%s/foo/bar/g	replace all matches of 'foo' with 'bar' in the entire file (`:%s`)
 :%s/foo/bar/gc	ask to manually confirm (`c` flag) each replacement
+# replace \n with ;\n
+:%s/\n/;\r/g
+# replace all digital number 
+:%s/.*([0-9]+).*/\1/g
 
 # Preceding a motion or edition with a number repeats it 'n' times
 # Examples:
@@ -118,3 +122,24 @@ nmap <F2> "= system("uuidgen")[:-2]<C-M>P
 # Delete every line that has a FOO in it. See `:help global`.
 # The _ in the d _ command ensures registers and clipboards are not changed.
 :g/FOO/d _
+
+# move screen up one line
+ctrl + y
+
+# move screen down one line
+ctrl + e
+
+# record macro with name 'a', finish record with another 'q'
+qa
+
+# play macro with name 'a'
+@a
+
+
+# column pattern. e.g. insert 'abc' at the begin of each line
+1. press 'ctrl' + 'v'
+2. move to end of file(G)
+3. press 'I'//shift +i.
+4. type 'abc' and press 'ESC' twice.
+
+#.

@@ -15,3 +15,29 @@ sort <inputFile> -o <outputFile>
 
 # Sort by default uses /var/tmp to store temp files but size of /var/tmp directory is limited. In order to sort huge use a directory with adequate size:
 sort -T <tempDirectory> <file>
+
+# sort by column
+# aa.txt:
+# tom  30
+# jimmy 40
+sort -k2 -t ' ' -n aa.txt 
+
+# split column by ','
+# tom,30
+# jimmy,40
+sort -k2 -t ',' -n aa.txt 
+
+# a.txt contains "1 2 3", b.txt contains "2 3 4"
+
+# ==1. subtract 2 sets. a.txt - b.txt. print '1'
+sort a.txt  b.txt b.txt | uniq -u # -u: only print items that appear ==1
+
+# >=1. union a.txt and b.txt
+sort a.txt b.txt | uniq #  print '1 2 3 4'
+
+# >= 2. intersect 2 sets.
+sort a.txt b.txt | uniq -d # -d: only print items that appear >= 2
+
+
+
+#  

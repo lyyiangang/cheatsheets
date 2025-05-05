@@ -1,3 +1,9 @@
+# pull image without wall
+ss=a.ussh.net
+docker pull $ss/IMG_NAME
+#e.g.:
+docker pull $ss/qwenllm/qwen:cu121
+
 # To start the docker daemon:
 docker -d
 
@@ -102,3 +108,5 @@ docker cp <container-id>:<path/to/file> <host/copy/path>
 
 # To copy a file from host mechine to the running container:
 docker cp <host/copy/path> <container-id>:<path/to/file>
+
+

@@ -1,5 +1,20 @@
+# gen core file, before run app, we need run following commands first.
+sysctl -w kernel.core_pattern=core
+ulimit -c unlimited
+# if in a docker contaienr , we need add --privileged 
+
+# save breakpoints.
+save breakpoints bb.txt
+# load breakpoints.
+source bb.txt
+
+# you need build cpp code with 'g++ main.c -o a.out -std=c++11 -g -O0'
+# ref:https://hikoqiu.github.io/posts/zh/2017/07/GDBchangyongmingling_tech.html
 # To start the debugger:
 gdb <executable>, gdb --args <executable> [<args>...], gdb -p <pid>
+
+# call a function, you can add a break poing in all_func and then use command call
+call add_func(3, 4)
 
 # To exit gdb (after program terminated):
 q, quit
@@ -10,18 +25,34 @@ b, break <function>
 # To set a (conditional) breakpoint at a general location:
 b, break <loc> [if <condition>]
   with <loc> as <function>|<file>:<line>|<line>|*<address>|-offset|+offset
+#e.g.
+b src/test.cc:52 if aa==true
+
+
+# print loop. print array's fields
+set $idx=0
+p persons[idx++].age
+//then press enter, it will print persons[0].age, persons[1].age,...
+
+# print loop way 2. e.g. person.size == 20
+set $idx=0
+while ($idx < 20)
+p persons[$idx++].age
+end
 
 # To set a watchpoint, i.e., stop when expression changes its value:
 watch <expr>
+e.g. watch idx==10, break when idx == 10.
 
 # To show all breakpoints and watchpoints:
 info breakpoints, info watchpoints
 
-# To delete all or given breakpoints and watchpoints:
+# To delete all or given breakpoints and watchpoints.  del all breakpoints, just use 'd'
 clear, delete
 delete <num>
 clear <loc>
   with <loc> as <function>|<file>:<line>|<line>|*<address>|-offset|+offset
+
 
 # To disable a breakpoint:
 dis, disable <num>
@@ -128,3 +159,18 @@ C-x o
 
 # To Switch in and out of the TUI SingleKey mode:
 C-x s
+
+# print all items
+set print repeats 0
+
+# print eigen
+p *mat.row(2).data()@30
+p *mat.data()@100
+
+# add tempory break point, deleted automatically when reach
+tbreak 522
+
+# ignore breakpoint #3 20 times
+ignore 3 20
+# then check how many times #3 hit.
+info b 3

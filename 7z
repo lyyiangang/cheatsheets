@@ -1,6 +1,9 @@
 ---
 tags: [ compression ]
 ---
+# extrac .7z file
+7z x aa.7z
+
 7z [Args] [archive.7z] [files / folders to archive]
 A file archiver with highest compression ratio
 

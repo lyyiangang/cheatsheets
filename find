@@ -4,6 +4,9 @@ find -L . -type f
 # To find files by case-insensitive extension (ex: .jpg, .JPG, .jpG):
 find . -iname "*.jpg"
 
+# find files under org_imgs folder
+find . -name "*.jpg" -path '*/org_imgs/*'
+
 # To find directories:
 find . -type d
 
@@ -22,7 +25,7 @@ find . -type f -ctime -1 -print0 | xargs -0 -p cp -t <dir>
 find . -type f -ctime -1 -print0 | xargs -0 -p -J % cp % <dir>
 
 # To find files with extension '.txt' and remove them:
-find ./path/ -name '*.txt' -delete
+find ./ -name '*.txt' -delete
 
 # To find files with tilde as postfix and remove them:
 find ./path/ -name '*~' -delete
@@ -32,6 +35,9 @@ find ./path/ -name '*.txt' -exec cat '{}' \;
 
 # To find files with extension '.txt' and look for a string into them:
 find ./path/ -name '*.txt' | xargs grep 'string'
+
+# 查找尺寸大于1M的所有文件
+find /path/to/your/folder -type f -size +1M
 
 # To find files with size bigger than 5 Mebibyte and sort them by size:
 find . -size +5M -type f -print0 | xargs -0 ls -Ssh | sort -z
@@ -81,3 +87,9 @@ find . -type f -exec sh -c "echo '{}'; cat '{}';" \;
 
 # To find files that are newer than a file:
 find <path> -newer <target-file>
+
+# skip path.e.g. search all .txt file but ./tmp
+find ./ -type d -name 'tmp' -prune -o 
+
+# find empty file(with size less than 1Byte)
+find ./ -type f -size -1c

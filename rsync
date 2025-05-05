@@ -3,8 +3,11 @@
 rsync -avz host:file1 :file1 /dest/
 rsync -avz /source host:/dest
 
+# sync and delete useless file
+rsync -avz $src $dest --delete
+
 # To copy files using checksum (-c) rather than time to detect if the file has
-# changed. (Useful for validating backups):
+# changed. (Useful for validating backups, slower.):
 rsync -avc <src> <dest>
 
 # To copy /src/foo folder into destination:
@@ -33,3 +36,8 @@ find /path/to/files -type l -print | \
 
 # exclude some files
 rsync -avz --progress ./foler abc@192.168.0.10:/home/abc/code/ --exclude .git/ --exclude tmp/
+
+# only sync files with specified extension, 注意source和target要加/
+rsync -a --include '*/' --include '*.mp3' --exclude '*' source/ target/
+
+

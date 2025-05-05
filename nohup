@@ -1,0 +1,2 @@
+# run cmd in background 
+nohup python test.py > log.txt 2>&1 &

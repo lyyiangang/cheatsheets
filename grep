@@ -1,6 +1,14 @@
 # To search a file for a pattern:
 grep <pattern> <file>
 
+# print line number -n
+grep -n aa.txt
+# grep keyword and print the files' name only
+grep -l 'abc' a.json
+
+# print files which don't contain keyword
+grep -L 'abc' a.json
+
 # To perform a case-insensitive search (with line numbers):
 grep -in <pattern> <file>
 
@@ -12,6 +20,8 @@ grep -f <pattern-file> <file>
 
 # Find lines NOT containing pattern:
 grep -v <pattern> <file>
+#e.g. print lines without abc or efg
+grep -Ev 'abc|efg' a.txt
 
 # Set how many lines to show before (-B) and after (-A) pattern:
 grep -B 3 -A 2 <pattern> <file>
@@ -42,3 +52,35 @@ if grep -q 'target_str' a.txt; then
 fi
 
 # grep process please see 'pgrep' comand
+#
+# grep multi lines
+#
+#.txt file:
+#  """
+#  kind: Deployment
+#  metadata:
+#  name: projecta-web-ms-deployment
+#  namespace: projecta-dev
+#  """
+# to match 'name' row, we can use. P: user perl. z:process multi line. o:only display lines which match
+grep -Pzo "metadata:\s*\n  name:.*$" tmp.txt
+
+# print the lines before matched line
+grep -B 5 'pattern' file
+
+# print the lines after matched line
+grep -A 5 'pattern' file
+
+# print the lines both before and after the match line
+grep -5 'pattern' file
+
+# sum 1+2+3, output : 6
+ echo '1\n2\n3' | paste -sd + | bc
+
+# count 'name' occurance 
+gerp  -c 'name' aa.txt
+
+# use grep -c in bash
+count=$(grep -c 'name' aa.txt || true)
+echo $count
+

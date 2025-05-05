@@ -1,5 +1,6 @@
+# https://www.baeldung.com/linux/jq-command-json
 # To pretty print the json:
-jq "." < filename.json
+jq "." < filename.json # or jq '.' filename.json
 
 # To access the value at key "foo":
 jq '.foo'
@@ -29,3 +30,5 @@ jq '.foo[] | {field_1,field_2} | join(" ")'
 
 # only print records where given field matches a value
 jq '.foo[] | select(.field_1 == "value_1")'
+
+jq '.[].name' fruits.json

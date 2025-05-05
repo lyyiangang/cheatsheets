@@ -1,0 +1,16 @@
+# cpp intelli
+1. mkdir .vscode/ && touch .vscode/c_cpp_properties.json
+2. add following scripts
+```
+{
+  "configurations":
+  [
+    "name" : "Linux",
+    "includePath":[
+      "${workspaceFolder}/**", "/user/include/**",
+    ],
+    "compilerPath": "/usr/bin/gcc"
+  ]
+}
+```
+3. reload window
