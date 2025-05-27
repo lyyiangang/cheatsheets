@@ -1,3 +1,9 @@
+# compare string, need use [[ and ]]
+str="hello"
+if [[ "$str" == "hello" ]]; then
+    echo "匹配成功"
+fi
+
 # check folder exsit, use '! -d' indicate not exist.
 if [ -d "$DIRECTORY" ];
 then
@@ -63,4 +69,19 @@ elif [ conditionb ]; then
   echo 'b'
 else
   echo 'c'
+fi
+
+# verify gpu model
+#!/bin/bash
+
+# 获取 GPU 型号
+gpu_model=$(nvidia-smi --query-gpu=name --format=csv,noheader)
+
+# 判断是否为 H20
+if [[ "$gpu_model" == *"H20"* ]]; then
+    echo "✅ 当前 GPU 是 NVIDIA H20"
+    echo "型号: $gpu_model"
+else
+    echo "❌ 当前 GPU 不是 H20"
+    echo "检测到的型号: $gpu_model"
 fi

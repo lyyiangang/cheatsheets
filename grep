@@ -20,6 +20,7 @@ grep -f <pattern-file> <file>
 
 # Find lines NOT containing pattern:
 grep -v <pattern> <file>
+
 #e.g. print lines without abc or efg
 grep -Ev 'abc|efg' a.txt
 

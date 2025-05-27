@@ -18,3 +18,102 @@ dist.barrier()# continue only when all rank reach this line
 fid0 = open('part_0.pkl', 'rb')
 fd1 = open('part_1.pkl', 'rb')
 merge_pkl(fid0, fid1)
+
+
+## LOSS
+- focal loss
+loss_cls = dict(type = 'FocalLoss', use_sigmoid = True)
+bs = 2
+num_cls =3
+preds = torch.tensor([bs, num_cls])
+gts = torch.tensor([0, 1, 2]].long()
+assert len(gts.shape) == 1
+loss_cls(preds, gts)
+
+- one hot focal loss
+from torchvision.ops.focal_loss import sigmoid_focal_loss
+one_hot_gts = torch.tensor([[1,0,0], [0, 0, 1]])
+loss = sigmoid_focal_loss(preds, one_hot_gts)
+
+# get True index in mask,always return 2d result with shape (num_nonzero, input.dim())
+x = torch.tensor([[0, 1, 0],
+                  [2, 0, 3]])
+indices = torch.nonzero(x)
+print:
+tensor([[0, 1],
+        [1, 0],
+        [1, 2]])
+
+
+## NMS
+a naive python implement: https://github.com/amusi/Non-Maximum-Suppression/blob/master/nms.py
+2 version of nms can be used, before nms, we also need filter scores with score_threshold and topk mask first(see filter_scores_and_topk).
+1. mmdet.ops.multiclass_nms.
+   see https://vscode.dev/github/open-mmlab/mmdetection/blob/master/mmdet/models/dense_heads/yolo_head.py#L290
+   boxes[N,4], scores[N,n_cls+1] as input. example, 注意scores需要增加一列bg类
+        import torch
+        from mmdet.core import multiclass_nms
+        bboxes = torch.tensor([[0, 0, 10, 10], [5, 5, 15, 15], [20, 20, 30, 30], [25, 25, 35, 35]], dtype=torch.float32)
+        scores = torch.tensor([[0.9, 0.1], [0.8, 0.2], [0.7, 0.3], [0.6, 0.4]], dtype=torch.float32)
+        nms_cfg = {'type': 'nms', 'iou_threshold': 0.5}
+        dets, labels = multiclass_nms(bboxes, scores, nms_cfg)
+
+2. mmcv.ops.batched_nms
+    see https://vscode.dev/github/open-mmlab/mmdetection/blob/master/mmdet/models/dense_heads/base_dense_head.py#L295.
+   need boxes, scores and labels.
+相对来说使用multiclass_nms会更方便些，只要提供boxes, scores就行， batched_nms还需要提供labels
+
+## mmdetection
+- use cfg option
+dist_train.sh cfg_file gpu_per_node --cfg-options 'data.samples_per_gpu=16 data.workers_per_gpu=16'
+
+
+## fcos.
+reg head: left, top,bottom,right
+cls head: n_class + 1 centerness
+
+## torch.floor
+向负方向取整,返回值<=输入值
+torch.floor([3.2, -2.7, 5.0, 0.5]) # # tensor([ 3., -3.,  5.,  0.])
+
+## torch.round
+四舍六入,5取偶
+torch.round([3.2, -2.7, 5.5, 0.5, 1.5]) #  3., -3.,  6.,  0.,  2.
+3.2 → 3.0（靠近 3）-2.7 → -3.0（靠近 -3）5.5 → 6.0（向偶数 6 舍入）0.5 → 0.0（向偶数 0 舍入）
+
+## layernorm
+# 输入x形状: (batch_size, seq_len, d_model)
+x = torch.rand(2, 5, 8) #(B, T, C)
+mean = x.mean(dim=-1, keepdim=True)  # 沿特征维度计算均值 -> mean:(B, T)
+variance = x.var(dim=-1, keepdim=True, unbiased=False)  # 计算方差
+x_normalized = (x - mean) / torch.sqrt(variance + eps)  # 归一化
+# 如果启用了affine, weight, bias会被应用到输出上。
+output = weight * x_normalized + bias  # 可学习的仿射变换
+
+
+## replace all layernorm with DynamicTanh
+def convert_ln_to_dyt(module):
+    module_output = module
+    if isinstance(module, nn.LayerNorm):
+        module_output = DynamicTanh(module.normalized_shape)
+    for name, child in module.named_children():
+        module_output.add_module(name, convert_ln_to_dyt(child))
+    del module
+    return module_output
+
+
+## sin embeding
+# output: sin(posx[0], cos(posx[1]), sin(posx[2]), cos(posx[3])
+def pos2posemb3d(pos, num_pos_feats=128, temperature=10000):
+    scale = 2 * math.pi
+    pos = pos * scale # map pos from [-1, 1] to [-2pi, 2pi]
+    dim_t = torch.arange(num_pos_feats, dtype=torch.float32, device=pos.device)
+    dim_t = temperature ** (2 * (dim_t // 2) / num_pos_feats)
+    pos_x = pos[..., 0, None] / dim_t
+    pos_y = pos[..., 1, None] / dim_t
+    pos_z = pos[..., 2, None] / dim_t
+    pos_x = torch.stack((pos_x[..., 0::2].sin(), pos_x[..., 1::2].cos()), dim=-1).flatten(-2)
+    pos_y = torch.stack((pos_y[..., 0::2].sin(), pos_y[..., 1::2].cos()), dim=-1).flatten(-2)
+    pos_z = torch.stack((pos_z[..., 0::2].sin(), pos_z[..., 1::2].cos()), dim=-1).flatten(-2)
+    posemb = torch.cat((pos_y, pos_x, pos_z), dim=-1)
+    return posemb

@@ -1,7 +1,20 @@
+# 模拟同步文件，仅仅同步新增的文件,n：dry-run， 模拟运行
+rsync -avn --ignore-existing backup/ dest/
+
+# sync with '/' and withou '/'
+# src/
+#    a.txt
+rsync -avz src dest/ # we will get dest/src/a.txt
+rsync -avz src/ dest/ # we will get dest/a.txt
+
 # To copy files from remote to local, maintaining file properties and sym-links
 # (-a), zipping for faster transfer (-z), verbose (-v):
 rsync -avz host:file1 :file1 /dest/
 rsync -avz /source host:/dest
+
+# sync in parallel, with 4 process
+cat list.txt | xargs -i -P 4 rsync -avz {} root@...:
+
 
 # sync and delete useless file
 rsync -avz $src $dest --delete

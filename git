@@ -19,6 +19,9 @@ git add --all
 # from the stash anytime
 git stash
 
+# save stash with name
+git stash save "exp. add new feature"
+
 # To stash changes with a message:
 git stash push -m <message>
 
@@ -184,6 +187,9 @@ git remote prune $(git remote | tr '\n' ' ')
 # So, this will show the first commit that has "cool" in their message body
 git show :/cool
 
+# checkout a file to a new file
+git show commit-id:path/to/file > new-file-name
+
 # To undo parts of last commit in a specific file:
 git checkout -p HEAD^ -- /path/to/file
 
@@ -217,3 +223,7 @@ git config --global commit.gpgsign true
 
 # To list unstracked files:
 git ls-files --others --exclude-standard
+
+# set proxy
+git config --global http.proxy http://username:password@proxyserver:port
+git config --global https.proxy http://username:password@proxyserver:port

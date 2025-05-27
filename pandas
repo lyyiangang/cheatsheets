@@ -1,3 +1,24 @@
+# gen a data frame
+import pandas as pd
+
+## from dict
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [25, 30, 35],
+    'City': ['New York', 'Los Angeles', 'Chicago']
+}
+
+df = pd.DataFrame(data)
+
+## from list
+data = [
+    ['Alice', 25, 'New York'],
+    ['Bob', 30, 'Los Angeles'],
+    ['Charlie', 35, 'Chicago']
+]
+
+df = pd.DataFrame(data, columns=['Name', 'Age', 'City'])
+
 # read/save csv file
 """gt.csv
 filename, score
@@ -99,3 +120,9 @@ df = pd.merge(df_old, df_new, left_on = 'filename', right_on = 'filename', how =
 
 # shuffle 
 df = df.sample(frac = 1)
+
+# analyze dataframe
+from ydata_profiling import ProfileReport
+df = pd.read_csv('data.csv')
+profile = ProfileReport(df, title='Pandas Profiling Report')
+profile.to_file('report.html')

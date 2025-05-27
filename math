@@ -1,0 +1,10 @@
+## rotation
+ref: https://blog.csdn.net/qq_39800978/article/details/102698993
+- 点的旋转
+R = [ cos, -sin
+      sin, cos]
+x'=rcos(a+b) = rcos_a*cos_b - rsin_a*sin_b = xcos_b - ysin_b
+
+- 坐标系的旋转
+R = [ cos, sin
+      -sin, cos]
