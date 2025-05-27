@@ -40,6 +40,8 @@ sed '/happily ever after/a\The end.'
 # \1 means the first match object. 
 echo "age:30"  | sed -nE "s/.*:([0-9])/\1/p"  # print '30'
 
+# get docker images name, \S 非空格字符
+docker images | sed -E 's/\S+\s+\S+\s+(\S+).*/\1/'
 # 在列表中每过30行取一行
 sed -n '1~30p' mylist.txt
 
@@ -56,4 +58,3 @@ docker images | grep pytorch | sed -nE 's/.*(>|latest)\s+(\w+).*/\2/p' | xargs -
 aa=/home/old
 bb=/home/new
 echo $aa | sed -E "s|${aa}|${bb}|"  #print /home/new
-

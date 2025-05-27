@@ -37,3 +37,8 @@ telnet 127.0.0.1 54273
 
 
 
+# profile cpu usage
+python -m cProfile -s tottime test.py 
+
+# profile memory usage
+python -m memory_profiler test.py
