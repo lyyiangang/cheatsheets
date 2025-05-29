@@ -32,3 +32,11 @@ sudo vi /etc/rc.local
 # add following line
 mount /dev/sda1 /home/firefly/2tdisk
 
+
+## mount nas. 手动挂载
+mkdir ~/nas_smb
+sudo mount -t cifs //192.168.50.28/homes ${HOME}/nas_smb -o username=lyy,password=1234,vers=3.0,uid=1000
+
+##  mount nas.开机启动
+sudo vi /etc/fstab
+//192.168.50.28/homes  /home/abc/nas_smb  cifs  username=lyy,password=1234,vers=3.0,uid=1000  0  0
