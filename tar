@@ -7,6 +7,9 @@ tar -xvf /path/to/foo.tar
 # To extract a .tar in specified directory:
 tar -xvf /path/to/foo.tar -C /path/to/destination/
 
+## tar from filelist(dirs.txt)
+tar --use-compress-program=zstd -cvf ../tmp.tar -T dirs.txt
+
 # To create an uncompressed archive:
 tar -cvf /path/to/foo.tar /path/to/foo/
 

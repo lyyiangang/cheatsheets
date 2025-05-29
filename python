@@ -13,6 +13,30 @@ python -m smtpd -n -c DebuggingServer localhost:1025
 # Pretty print a json
 python -m json.tool foo.json
 
+# debug multi process[https://stackoverflow.com/questions/11106000/python-multiprocess-debugging]
+pip install remote-pdb
+from multiprocessing import Pool
+
+def test(thing):
+  from remote_pdb import set_trace
+  set_trace()
+  s = thing*2
+  print(s)
+  return s
+
+if __name__ == '__main__':
+  with Pool(5) as p:
+    print(p.map(test,['dog','cat','bird']))
+
+it print
+```
+RemotePdb session open at 127.0.0.1:54273, waiting for connection ...
+```
+in another terminal:
+telnet 127.0.0.1 54273
+
+
+
 # profile cpu usage
 python -m cProfile -s tottime test.py 
 

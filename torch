@@ -29,4 +29,61 @@ scaler.scale(loss).backward()
 
 
 
+## loss
+- focalloss
+# do 3 classifcation, 
+grid_num=2
+num_class = 3
+loss = FocalLoss(use_sigmoid = True, gamma = 2.0, alpha = 0.25, loss_weight = 2.0)
+labels = torch.tensor([0, 2]) # 1d label
+pred = torch.random(bs, num_class) # 2d pred
+#不需要显示声明背景类别， loss会通过pred.shape[-1]计算背景类别的label， 即bg_label = pred.shape[-1]
+result = loss(pred, loss)
 
+# mean
+arr=torch.rand(2,3)
+idx, vals = arr.min(axis = 1)
+# idx:[0,2], vals:[0.1, 0.5]
+
+
+## local rank, global rank and world size
+```
+    import torch
+    import torch.distributed as dist
+    from torch.utils.data import Dataset, DataLoader
+    from torch.utils.data.distributed import DistributedSampler
+
+    # 下面举个2机器，每机器4卡的例子
+    # 初始化分布式环境
+    dist.init_process_group(backend="nccl")
+    local_rank = int(os.environ["LOCAL_RANK"]) # 单台机器上的rank, 处于[0, 3], 主要用与设置数据和模型部署的设备编号
+    global_rank = dist.get_rank() # 所有机器上的rank， 处于[0, world_size] 即[0, 7]
+    world_size = dist.get_world_size()  #又叫num_replicas, 这里应该是 8 (2台机器 × 4个GPU)
+    # 设置当前进程使用的GPU
+    torch.cuda.set_device(local_rank)
+    dataset = ImageDataset("path/to/data")
+    # 创建分布式采样器, 每个sampler会根据global_rank来采样自己负责的数据区间
+    sampler = DistributedSampler(dataset,num_replicas=world_size,rank=global_rank, shuffle=True)
+    def worker_init_fn(worker_id, num_workers, global_rank, seed):
+        # 每个worker设置不同的随机数
+        worker_seed = num_workers * global_rank + worker_id + seed
+        np.random.seed(worker_sedd)
+        random.seed(worker_seed)
+
+    # 创建DataLoader, 每个GPU使用4个工作进程pin_memory=True. sampler 和batch_sampler二者设置一个就行
+    dataloader = DataLoader(dataset,batch_size=32,sampler=sampler,batch_sampler = None,num_workers=4,worker_init_fn = worker_init_fn)
+    # 训练模型
+    model = YourModel().cuda()
+    model = torch.nn.parallel.DistributedDataParallel(
+        model, 
+        device_ids=[local_rank]
+    )
+
+    # 训练循环
+    for epoch in range(num_epochs):
+        # 重要：每个epoch需要重置sampler
+        sampler.set_epoch(epoch)
+        for batch in dataloader:
+            # 训练逻辑
+            # ...
+```

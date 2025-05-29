@@ -1,0 +1,6 @@
+# 直到a.out打印出'done'时才直行命令
+while ! ./a.out | grep -q "done"; do
+    sleep 1  # 避免 CPU 占用过高
+done
+echo "检测到 'done'，执行后续命令..."
+your_command_here

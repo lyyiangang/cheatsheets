@@ -1,5 +1,13 @@
 from p_tqdm import p_map
-def eval(a):
-  return  a+5
 
-p_map(eval, [1,2,3])
+# 定义两个列表
+list1 = [1, 2, 3, 4, 5]
+list2 = [10, 20, 30, 40, 50]
+
+# 定义一个函数，用于逐元素相加
+def add_elements(a, b):
+    return a + b
+
+# 使用 p_map 并行化计算
+results = p_map(add_elements, list1, list2)
+

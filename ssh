@@ -1,6 +1,13 @@
 ---
 tags: [ ssh ]
 ---
+
+# 端口转发。将本地1234端口的访问转发到远程服务器的1234端口上，此时如果远程服务器有一个网络服务器读取的是1234，那本地的浏览器也能靠本地的1234端口访问该服务
+ssh -L 1234:localhost:1234 abc@10.12.13.14 -N
+
+# A->B->C
+ssh -L <A本地端口>:<C服务器IP>:<C目标端口> <B服务器用户>@<B服务器IP> -N
+
 # To ssh via pem file (which normally needs 0600 permissions):
 ssh -i <pemfile> <user>@<host>
 
