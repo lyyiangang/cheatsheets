@@ -1,5 +1,8 @@
 # pull image without wall
 ss=a.ussh.net
+or 
+ss=a.ussh.net/library/
+
 docker pull $ss/IMG_NAME
 #e.g.:
 docker pull $ss/qwenllm/qwen:cu121
