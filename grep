@@ -1,3 +1,12 @@
+
+# 需要转义的字符
+. * + ? [ ^ $ { `\
+
+# 贪婪模式&非贪婪模式(需要在量词加？)
+对于字符<div>Hello</div>, <.*> 会匹配字符串的第一个<和最后一个>内的所有内容， 如果是非贪婪模式<.*?>则会匹配第一个<div>
+e.g.
+grep -Po '<div>.*?</div>' test.txt
+
 # To search a file for a pattern:
 grep <pattern> <file>
 
