@@ -1,5 +1,7 @@
 # replace ./images/aa.png to ##images#aa.png and copy it to $dest, note we need  bash -c '...' and "{}' here
-ls | xargs -i bash -c ' new_name=$(echo "{}" | sed -nE "s/\/|\./#/g"; cp -v {} ${dest}/$new_name '
+#need use ' after -c 
+dest=../tmp/
+find . -name "*.jpg" | xargs -i bash -c ' new_name=$(echo {} | sed -nE "s/\/|\./#/g"); cp -v {} ${dest}/$new_name '
 
 
 # To Find all file name ending with .pdf and remove them
