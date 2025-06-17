@@ -35,10 +35,37 @@ RemotePdb session open at 127.0.0.1:54273, waiting for connection ...
 in another terminal:
 telnet 127.0.0.1 54273
 
-
-
-# profile cpu usage
-python -m cProfile -s tottime test.py 
-
 # profile memory usage
 python -m memory_profiler test.py
+
+# profile via cProfile
+import pstats
+import cProfile
+profiler = cProfile.Profile()
+profiler.enable()
+add_func(3, 8)
+profiler.disable()
+stats = pstats.Stats(profiler)
+stats.sort_stats('cumtime')
+stats.print_stats()
+exit(0)
+
+# profile via line_profiler
+def add_func(a, b):
+    return a + b
+class Dog:
+  def say(self, txt):
+    print(txt)
+
+from line_profiler import LineProfiler
+profiler = LineProfiler()
+profiler.add_function(add_func)
+profiler.runcall(add_func, 3, 8)
+# or call the function of instance
+#d = Dog()
+#profiler.add_function(d.say)
+#profiler.runcall(d.say,'hello')
+profiler.print_stats()
+exit(0)
+
+
