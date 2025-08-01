@@ -227,3 +227,10 @@ git ls-files --others --exclude-standard
 # set proxy
 git config --global http.proxy http://username:password@proxyserver:port
 git config --global https.proxy http://username:password@proxyserver:port
+
+
+# worktree
+git worktree add <path> <branch-name>
+git worktree list
+git worktree remove <path>
+git worktree move <old-path> <new-path>
