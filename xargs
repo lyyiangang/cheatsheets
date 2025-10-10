@@ -28,3 +28,6 @@ find -name "*.pdf" | xargs --no-run-if-empty rm
 # continue run with xargs meet error. need add '|| true' in case of missing 'missmatch' folder
 ls -d */ | xargs -i sh -c 'mv {}/missmatch/* {} || true'
 
+# print one by one, print torch version of each image
+ss='aa bb cc'
+echo $s | xargs -n 1 | xargs -i bash -c 'docker run --rm {} pip list | grep torch'
